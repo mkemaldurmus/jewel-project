@@ -2,7 +2,6 @@ package com.exastax.internship.jewel.datacollect.starter;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.jsoup.Jsoup;
@@ -60,11 +59,11 @@ public class DataProducerMain {
                  */
                 final String productId = product.attr("uid");
                 final String productURL = "https://www.altinbas.com/urun" + product.getElementsByTag("a").get(0).attr("href");
-                while (true) {
+
                     ProducerRecord<String, String> record = new ProducerRecord<>(topic, productId, productURL);
                     kafkaProducer.send(record);
 
-                }
+
                 /*
                     TODO: Send Key/Value pair to Kafka Broker
                     Key is product's ID
